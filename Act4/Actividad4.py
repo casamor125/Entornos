@@ -57,3 +57,14 @@ if A <0:
         print("El producte dels tres es: ",A*B*C)
 else:
         print("La suma dels tres es: ",A+B+C)        
+
+#Ejercicio 6
+
+print("Introduzca un numero y le mostrare su cuadrado y su raiz cuadrada")
+A = int(input("Introduzca el numero"))
+
+if A >0:
+        print("El cuadrado del numero es = ",A**2," Y su raiz es = ",A**0.5)
+else:
+        print("La suma dels tres es: ",A+B+C) 
+
