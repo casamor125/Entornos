@@ -22,7 +22,7 @@ B = int(input ("Introduzca un numero B"))
 if A > B:
         print("A es mayor que B")
 elif A < B:
-        print("B es mayor que B")
+        print("B es mayor que A")
 else:
         print("A y B son iguales")
 
@@ -37,17 +37,23 @@ C = int(input ("Introduzca un numero B"))
 if A == B == C:
         print("A,B,C son iguales")
 else:
-        if A>B>C:
+        if A>B and A>C:
                 print ("A es el mayor")
-        elif B>A>C:
+        elif B>A and B>C:
                 print ("B es el mayor")
         else:
                 print("C es el mayor")
         
 
+#Ejercicio 5
+
+print("Introduzca tres numeros y si el primero es negativo imprimire el producto si no la suma")
+A = int(input("Introduzca un numer A"))
+B = int(input ("Introduzca un numero B"))
+C = int(input ("Introduzca un numero B"))
 
 
-
-
-
-    
+if A <0:
+        print("El producte dels tres es: ",A*B*C)
+else:
+        print("La suma dels tres es: ",A+B+C)        
