@@ -5,7 +5,7 @@ class Nave (pygame.sprite.Sprite):
     def __init__(self, posicion) -> None:
         super().__init__()
         #cargamos la imagen
-        self.imagenes = [pygame.image.load("avion4.png"), pygame.image.load("avion5.png")]
+        self.imagenes = [pygame.image.load("milenario.png"), pygame.image.load("Tie.png")]
         self.imagenes2 = [pygame.transform.scale(self.imagenes[0], (70, 100)), pygame.transform.scale(self.imagenes[1], (70,100))]
         self.indice_imagen = 0
         self.image = self.imagenes2[self.indice_imagen]
@@ -61,7 +61,7 @@ class Enemigo(pygame.sprite.Sprite):
     def __init__(self, posicion) -> None:
         super().__init__()
         #cargamos la imagen
-        imagen = pygame.image.load("avion4.png")
+        imagen = pygame.image.load("milenario.png")
         imagen2 = pygame.transform.scale(imagen, (80, 140))
         self.image = pygame.transform.rotate(imagen2, 180)
         self.mask = pygame.mask.from_surface(self.image)
