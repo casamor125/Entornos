@@ -38,11 +38,15 @@ class Nave (pygame.sprite.Sprite):
         if teclas[pygame.K_LEFT]:
             self.rect.x -= 10
             self.rect.x = max(0, self.rect.x)
-        elif teclas[pygame.K_RIGHT]:
+        if teclas[pygame.K_RIGHT]:
             self.rect.x += 10
             self.rect.x = min(pantalla.get_width() - self.image.get_width(), self.rect.x)
         if teclas[pygame.K_UP]:
-            self.disparar(grupo_sprites_todos, grupo_sprites_bala)
+            self.rect.y -=10
+        if teclas [pygame.K_DOWN]:
+            self.rect.y +=10    
+
+            
         #gestionamos la animación
         self.contador_imagen = (self.contador_imagen + 5) % 40
         self.indice_imagen = self.contador_imagen // 30
@@ -94,7 +98,7 @@ class Fondo(pygame.sprite.Sprite):
         imagen = pygame.image.load("fondo.jpg")
         #pantalla
         pantalla = pygame.display.get_surface()
-        self.image = pygame.transform.scale(imagen, (pantalla.get_width(), imagen.get_height()))
+        self.image = pygame.transform.scale(imagen, (pantalla.get_width(), imagen.get_height()+200))
         # creamos un rectangulo a partir de la imagen
         self.rect = self.image.get_rect()
         # actualizar la posición del rectangulo para que coincida con "posicion"
