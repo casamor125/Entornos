@@ -5,12 +5,16 @@ class Nave (pygame.sprite.Sprite):
     def __init__(self, posicion) -> None:
         super().__init__()
         #cargamos la imagen
-        self.imagenes = [pygame.image.load("milenario.png"), pygame.image.load("Tie.png")]
-        self.imagenes2 = [pygame.transform.scale(self.imagenes[0], (70, 100)), pygame.transform.scale(self.imagenes[1], (70,100))]
-        self.indice_imagen = 0
-        self.image = self.imagenes2[self.indice_imagen]
+        self.imagenes = pygame.image.load("milenario.png")
+        self.image = pygame.transform.scale(self.imagenes, (70, 100))
         self.mask = pygame.mask.from_surface(self.image)
         self.contador_imagen = 0
+
+        # imagen = pygame.image.load("Tie.png")
+        # imagen2 = pygame.transform.scale(imagen, (80, 140))
+        # self.image = pygame.transform.rotate(imagen2, 180)
+        # self.mask = pygame.mask.from_surface(self.image)
+
         #creamos un rectangulo a partir de la imagen
         self.rect = self.image.get_rect()
         #actualizar la posición del rectangulo para que coincida con "posicion"
@@ -38,19 +42,22 @@ class Nave (pygame.sprite.Sprite):
         if teclas[pygame.K_LEFT]:
             self.rect.x -= 10
             self.rect.x = max(0, self.rect.x)
-        if teclas[pygame.K_RIGHT]:
+        elif teclas[pygame.K_RIGHT]:
             self.rect.x += 10
             self.rect.x = min(pantalla.get_width() - self.image.get_width(), self.rect.x)
         if teclas[pygame.K_UP]:
+            # self.disparar(grupo_sprites_todos, grupo_sprites_bala)            
             self.rect.y -=10
+            self.rect.y = max(0,self.rect.y)
         if teclas [pygame.K_DOWN]:
-            self.rect.y +=10    
+            self.rect.y +=10  
+            self.rect.y = min(pantalla.get_height() - self.image.get_height(), self.rect.y)  
 
-            
+
         #gestionamos la animación
-        self.contador_imagen = (self.contador_imagen + 5) % 40
-        self.indice_imagen = self.contador_imagen // 30
-        self.image = self.imagenes2[self.indice_imagen]
+        # self.contador_imagen = (self.contador_imagen + 5) % 40
+        # self.indice_imagen = self.contador_imagen // 30
+        # self.image = self.imagenes2[self.indice_imagen]
         #Capturar grupo sprites enemigos 3
         grupo_sprites_enemigos = args[3]
         #variable running
@@ -65,9 +72,9 @@ class Enemigo(pygame.sprite.Sprite):
     def __init__(self, posicion) -> None:
         super().__init__()
         #cargamos la imagen
-        imagen = pygame.image.load("milenario.png")
+        imagen = pygame.image.load("meteorito.png")
         imagen2 = pygame.transform.scale(imagen, (80, 140))
-        self.image = pygame.transform.rotate(imagen2, 180)
+        self.image = pygame.transform.rotate(imagen2, 0)
         self.mask = pygame.mask.from_surface(self.image)
         #creamos un rectangulo a partir de la imagen
         self.rect = self.image.get_rect()
@@ -95,10 +102,10 @@ class Fondo(pygame.sprite.Sprite):
     def __init__(self) -> None:
         super().__init__()
         # cargamos la imagen
-        imagen = pygame.image.load("fondo.jpg")
+        imagen = pygame.image.load("nubes.jpeg")
         #pantalla
         pantalla = pygame.display.get_surface()
-        self.image = pygame.transform.scale(imagen, (pantalla.get_width(), imagen.get_height()+200))
+        self.image = pygame.transform.scale(imagen, (1000, 800))
         # creamos un rectangulo a partir de la imagen
         self.rect = self.image.get_rect()
         # actualizar la posición del rectangulo para que coincida con "posicion"
@@ -122,3 +129,32 @@ class Bala(pygame.sprite.Sprite):
 
     def update(self, *args: any, **kwargs: any) -> None:
         self.rect.y -=10
+
+class Astronauta(pygame.sprite.Sprite):
+    def __init__(self, posicion) -> None:
+        super().__init__()
+        #cargamos la imagen
+        imagen = pygame.image.load("astronauta.png")
+        self.image = pygame.transform.scale(imagen, (80, 140))        
+        self.mask = pygame.mask.from_surface(self.image)
+        #creamos un rectangulo a partir de la imagen
+        self.rect = self.image.get_rect()
+        #actualizar la posición del rectangulo para que coincida con "posicion"
+        self.rect.topleft = posicion
+
+    def update(self, *args: any, **kwargs: any):
+        pantalla = pygame.display.get_surface()
+        self.rect.y += 5
+        self.rect.x = max(0, self.rect.x)
+        self.rect.x = min(pantalla.get_width() - self.image.get_width(), self.rect.x)
+        # self.image = pygame.transform.rotate(self.image, 10)
+        if (self.rect.y > pantalla.get_height()):
+            self.kill()
+
+        #capturar arg 2 bala
+        grupo_sprites_bala = args[2]
+        grupo_sprites_todos = args[1]
+        nave_colision = pygame.sprite.spritecollideany(self, grupo_sprites_bala, pygame.sprite.collide_mask)
+        if nave_colision:
+            self.kill()
+            nave_colision.kill()

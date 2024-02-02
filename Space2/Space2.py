@@ -6,8 +6,8 @@ import pygame_menu
 pygame.init()
 
 #creamos la pantalla
-tamanio = (1000, 800)
-pantalla = pygame.display.set_mode(tamanio)
+tamaño = (1000, 800)
+pantalla = pygame.display.set_mode(tamaño)
 
 #creamos un reloj
 reloj = pygame.time.Clock()
@@ -52,6 +52,7 @@ def start_the_game():
     # Do the job here !
     running = [True]
     global ultimo_enemigo_creado
+    global ultimo_astronauta_creado
     global frecuencia_creacion_enemigo
     global FPS
     global reloj
@@ -69,6 +70,7 @@ def start_the_game():
     grupo_sprites_todos = pygame.sprite.Group()
     grupo_sprites_enemigos = pygame.sprite.Group()
     grupo_sprites_bala = pygame.sprite.Group()
+
 
      # grupo_sprites_todos.add(Elementos2.Fondo, (0, - ))
     grupo_sprites_todos.add(fondo)
@@ -106,9 +108,25 @@ def start_the_game():
                 grupo_sprites_enemigos.add(enemigo)
                 ultimo_enemigo_creado = momento_actual
 
+        # Asegúrate de tener estas líneas al principio del bucle principal
+        ultimo_astronauta_creado = 0
+        frecuencia_creacion_astronauta = 1000  # Puedes ajustar la frecuencia según sea necesario
+        grupo_sprites_astronautas = pygame.sprite.Group()      
+        if (momento_actual > ultimo_astronauta_creado + frecuencia_creacion_astronauta):
+            cordX = random.randint(0, pantalla.get_width())
+            cordY = 0
+            astronauta = Elementos2.Astronauta((cordX, cordY))
+            grupo_sprites_todos.add(astronauta)
+            grupo_sprites_astronautas.add(astronauta)
+            ultimo_astronauta_creado = momento_actual
+
+# ...
+
+
+
             grupo_sprites_todos.update(teclas, grupo_sprites_todos, grupo_sprites_bala, grupo_sprites_enemigos,
                                            running)
-
+            
         # capturamos las teclas
 
         # pintaremos:
