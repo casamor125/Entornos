@@ -20,22 +20,27 @@ font = pygame.font.Font(None, 30)
 # Variables globales
 ultimo_enemigo_creado = 0
 ultimo_astronauta_creado = 0
-frecuencia_creacion_enemigo = 250  # Valor por defecto
-frecuencia_creacion_astronauta = 750  # Valor por defecto
+frecuencia_creacion_enemigo = 500  # Valor por defecto
+frecuencia_creacion_astronauta = 1500  # Valor por defecto
+
 
 def set_difficulty(value, difficulty):
     global frecuencia_creacion_enemigo
     frecuencia_creacion_enemigo = difficulty
     global frecuencia_creacion_astronauta
-    frecuencia_creacion_astronauta = difficulty
+    frecuencia_creacion_astronauta = difficulty/2
 
 def start_the_game():
     running = [True]
     global ultimo_enemigo_creado
     global ultimo_astronauta_creado
+    global vidas 
+    global puntuacion
 
+    puntuacion = 0
+    vidas = 3
     posicion = (650, 700)
-    nave = Elementos2.Nave(posicion)
+    nave = Elementos2.Nave(posicion , vidas , puntuacion)
     fondo = Elementos2.Fondo()
 
     grupo_sprites_todos = pygame.sprite.Group()
@@ -60,8 +65,8 @@ def start_the_game():
         if teclas[pygame.K_ESCAPE]:
             running[0] = False
 
-        if teclas[pygame.K_SPACE]:
-            pausado = not pausado
+        # if teclas[pygame.K_p]:
+        #     pausado = not pausado
 
         if not pausado:
             momento_actual = pygame.time.get_ticks()
@@ -77,14 +82,14 @@ def start_the_game():
             if (momento_actual > ultimo_astronauta_creado + frecuencia_creacion_astronauta):
                 cordX = random.randint(0, pantalla.get_width())
                 cordY = 0
-                astronauta = Elementos2.Astronauta((cordX, cordY))
+                astronauta = Elementos2.Astronauta((cordX, cordY), nave)
                 grupo_sprites_todos.add(astronauta)
                 grupo_sprites_astronautas.add(astronauta)
                 ultimo_astronauta_creado = momento_actual
 
-            grupo_sprites_todos.update(teclas, grupo_sprites_todos, grupo_sprites_bala, grupo_sprites_enemigos,
+            grupo_sprites_todos.update(teclas, grupo_sprites_todos, grupo_sprites_bala, grupo_sprites_enemigos,grupo_sprites_astronautas,
                                        running)
-            grupo_sprites_todos.update(teclas, grupo_sprites_todos, grupo_sprites_bala, grupo_sprites_enemigos, running)
+          
             grupo_sprites_todos.draw(pantalla)
 
         if pausado:
@@ -96,7 +101,7 @@ def start_the_game():
 # Menú principal
 menu = pygame_menu.Menu('Welcome', 400, 300, theme=pygame_menu.themes.THEME_BLUE)
 menu.add.text_input('Name :', default='')
-menu.add.selector('Difficulty :', [('Hard', 200), ('Easy', 2000)], onchange=set_difficulty)
+menu.add.selector('Difficulty :', [('Hard', 400), ('Easy', 1500)], onchange=set_difficulty)
 menu.add.button('Play', start_the_game)
 menu.add.button('Quit', pygame_menu.events.EXIT)
 
