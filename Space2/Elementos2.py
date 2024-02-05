@@ -106,6 +106,7 @@ class Enemigo(pygame.sprite.Sprite):
         self.rect.x = min(pantalla.get_width() - self.image.get_width(), self.rect.x)
         if (self.rect.y > pantalla.get_height()):
             self.kill()
+            
 
         #capturar arg 2 bala
         grupo_sprites_bala = args[2]

@@ -69,15 +69,15 @@ def start_the_game():
         if teclas[pygame.K_ESCAPE]:
             running[0] = False
 
-        # if teclas[pygame.K_p]:
-        #     pausado = not pausado
+        if teclas[pygame.K_p]:
+            pausado = not pausado
 
         if not pausado:
             momento_actual = pygame.time.get_ticks()
 
             if (momento_actual > ultimo_enemigo_creado + frecuencia_creacion_enemigo):
                 cordX = random.randint(0, pantalla.get_width())
-                cordY = 0
+                cordY = -140
                 enemigo = Elementos2.Enemigo((cordX, cordY))
                 grupo_sprites_todos.add(enemigo)
                 grupo_sprites_enemigos.add(enemigo)
@@ -85,7 +85,7 @@ def start_the_game():
 
             if (momento_actual > ultimo_astronauta_creado + frecuencia_creacion_astronauta):
                 cordX = random.randint(0, pantalla.get_width())
-                cordY = 0
+                cordY = -90
                 astronauta = Elementos2.Astronauta((cordX, cordY), nave)
                 grupo_sprites_todos.add(astronauta)
                 grupo_sprites_astronautas.add(astronauta)
@@ -110,7 +110,8 @@ def start_the_game():
         pygame.display.flip()
 
 # Menú principal
-        
+# imagen = pygame.image.load("fondo.jpg")
+# imagen.blit(pantalla,(1000,800))        
 menu = pygame_menu.Menu('Welcome', 400, 300, theme=pygame_menu.themes.THEME_BLUE)
 
 menu.add.text_input('Name :', default='')
