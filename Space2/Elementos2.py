@@ -26,7 +26,7 @@ class Nave (pygame.sprite.Sprite):
 
     def disparar(self, grupo_sprites_todos, grupo_sprites_bala):
         momento_actual = pygame.time.get_ticks()
-        if momento_actual > self.ultimo_disparo + 200:
+        if momento_actual > self.ultimo_disparo + 300:
             bala = Bala((self.rect.x + self.image.get_width() / 2, self.rect.y + self.image.get_width() / 2))
             grupo_sprites_bala.add(bala)
             grupo_sprites_todos.add(bala)
@@ -45,7 +45,7 @@ class Nave (pygame.sprite.Sprite):
         if teclas[pygame.K_LEFT]:
             self.rect.x -= 10
             self.rect.x = max(0, self.rect.x)
-        elif teclas[pygame.K_RIGHT]:
+        if teclas[pygame.K_RIGHT]:
             self.rect.x += 10
             self.rect.x = min(pantalla.get_width() - self.image.get_width(), self.rect.x)
         if teclas[pygame.K_UP]:           
@@ -70,6 +70,7 @@ class Nave (pygame.sprite.Sprite):
         #detectar colisiones
         enemigo_colision = pygame.sprite.spritecollideany(self, grupo_sprites_enemigos, pygame.sprite.collide_mask)
         if enemigo_colision:
+            
             enemigo_colision.kill()
             self.vidas -= 1 
             
@@ -82,7 +83,7 @@ class Nave (pygame.sprite.Sprite):
         if astronauta_colision:
             astronauta_colision.kill()
             self.puntuacion += 100
-            print("la puntuacion es",self.puntuacion)
+        
             
 #creador de enemigos
 class Enemigo(pygame.sprite.Sprite):
@@ -91,7 +92,7 @@ class Enemigo(pygame.sprite.Sprite):
         #cargamos la imagen
         imagen = pygame.image.load("meteorito.png")
         imagen2 = pygame.transform.scale(imagen, (80, 140))
-        self.image = pygame.transform.rotate(imagen2, 0)
+        self.image = pygame.transform.rotate(imagen2, 340)
         self.mask = pygame.mask.from_surface(self.image)
         #creamos un rectangulo a partir de la imagen
         self.rect = self.image.get_rect()
@@ -138,8 +139,8 @@ class Fondo(pygame.sprite.Sprite):
 class Bala(pygame.sprite.Sprite):
     def __init__(self, posicion) -> None:
         super().__init__()
-        self.image = pygame.Surface((5, 10))
-        self.image.fill((255, 0, 0))
+        self.image = pygame.image.load("perla.png")
+        self.image = pygame.transform.scale(self.image,(10,10))
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.center = posicion
@@ -175,5 +176,9 @@ class Astronauta(pygame.sprite.Sprite):
         if (self.rect.y > pantalla.get_height()):
             self.kill()
             self.nave.puntuacion -= 100
+
+
+
+
 
        

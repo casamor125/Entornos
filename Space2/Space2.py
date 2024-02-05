@@ -43,6 +43,8 @@ def start_the_game():
     nave = Elementos2.Nave(posicion , vidas , puntuacion)
     fondo = Elementos2.Fondo()
 
+
+
     grupo_sprites_todos = pygame.sprite.Group()
     grupo_sprites_enemigos = pygame.sprite.Group()
     grupo_sprites_astronautas = pygame.sprite.Group()
@@ -50,6 +52,8 @@ def start_the_game():
 
     grupo_sprites_todos.add(fondo)
     grupo_sprites_todos.add(nave)
+
+  
 
     pausado = False
 
@@ -89,8 +93,15 @@ def start_the_game():
 
             grupo_sprites_todos.update(teclas, grupo_sprites_todos, grupo_sprites_bala, grupo_sprites_enemigos,grupo_sprites_astronautas,
                                        running)
+            
           
             grupo_sprites_todos.draw(pantalla)
+
+        textoP = font.render(f"Puntuacion: {nave.puntuacion}", True, "White")
+        pantalla.blit(textoP, (10,10))
+        textoV = font.render(f"Vidas: {nave.vidas}", True, "White")
+        pantalla.blit(textoV, (10,30))
+
 
         if pausado:
             texto = font.render("PAUSA", True, "White")
@@ -99,11 +110,14 @@ def start_the_game():
         pygame.display.flip()
 
 # Menú principal
+        
 menu = pygame_menu.Menu('Welcome', 400, 300, theme=pygame_menu.themes.THEME_BLUE)
+
 menu.add.text_input('Name :', default='')
 menu.add.selector('Difficulty :', [('Hard', 400), ('Easy', 1500)], onchange=set_difficulty)
 menu.add.button('Play', start_the_game)
 menu.add.button('Quit', pygame_menu.events.EXIT)
+
 
 # Mostramos el menú y ejecutamos el juego
 menu.mainloop(pantalla)
