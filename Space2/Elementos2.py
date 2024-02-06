@@ -74,10 +74,15 @@ class Nave (pygame.sprite.Sprite):
         #detectar colisiones
         enemigo_colision = pygame.sprite.spritecollideany(self, grupo_sprites_enemigos, pygame.sprite.collide_mask)
         if enemigo_colision:
+            tiempo_explosion = pygame.time.get_ticks()
             self.parpadear = True
-            enemigo_colision.kill()
-            self.vidas -= 1 
+            enemigo_colision.image = enemigo_colision.imagen2[1]
+ 
             self.tiempo_parpadear = pygame.time.get_ticks()
+            if(tiempo_explosion>1000):
+                enemigo_colision.kill()
+                self.vidas -= 1 
+
             
         
         if self.vidas < 1:
@@ -105,9 +110,10 @@ class Enemigo(pygame.sprite.Sprite):
     def __init__(self, posicion) -> None:
         super().__init__()
         #cargamos la imagen
-        imagen = pygame.image.load("meteorito.png")
-        imagen2 = pygame.transform.scale(imagen, (80, 140))
-        self.image = pygame.transform.rotate(imagen2, 340)
+        imagen = [pygame.image.load("meteorito.png"),pygame.image.load("explosion.png") ]
+        self.imagen2 = [pygame.transform.scale(imagen[0],(80,140)) ,
+                       pygame.transform.scale(imagen[1],(80,140)) ]
+        self.image = pygame.transform.rotate(self.imagen2[0], 340)
         self.mask = pygame.mask.from_surface(self.image)
         #creamos un rectangulo a partir de la imagen
         self.rect = self.image.get_rect()
