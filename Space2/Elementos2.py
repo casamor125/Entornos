@@ -11,6 +11,8 @@ class Nave (pygame.sprite.Sprite):
         self.contador_imagen = 0
         self.vidas = vidas
         self.puntuacion = puntuacion
+        self.parpadear = False
+        self.tiempo_parpadear = pygame.time.get_ticks()
 
 
         # imagen = pygame.image.load("Tie.png")
@@ -58,6 +60,8 @@ class Nave (pygame.sprite.Sprite):
             self.disparar(grupo_sprites_todos, grupo_sprites_bala) 
 
         #gestionamos la animación
+            
+       
         # self.contador_imagen = (self.contador_imagen + 5) % 40
         # self.indice_imagen = self.contador_imagen // 30
         # self.image = self.imagenes2[self.indice_imagen]
@@ -70,9 +74,10 @@ class Nave (pygame.sprite.Sprite):
         #detectar colisiones
         enemigo_colision = pygame.sprite.spritecollideany(self, grupo_sprites_enemigos, pygame.sprite.collide_mask)
         if enemigo_colision:
-            
+            self.parpadear = True
             enemigo_colision.kill()
             self.vidas -= 1 
+            self.tiempo_parpadear = pygame.time.get_ticks()
             
         
         if self.vidas < 1:
@@ -84,7 +89,17 @@ class Nave (pygame.sprite.Sprite):
             astronauta_colision.kill()
             self.puntuacion += 100
         
-            
+        if self.parpadear:
+            tiempo_actual = pygame.time.get_ticks()
+            if tiempo_actual % 200 < 100:
+                self.image = pygame.Surface((1,1)) #imagen invisible
+            else:
+                self.image = pygame.transform.scale(pygame.image.load("milenario.png"), (70, 100))
+                #reiniciar parpadeo
+                if tiempo_actual - self.tiempo_parpadear > 1000: #duracion
+                    self.parpadear = False
+        else:
+            self.image = pygame.transform.scale(pygame.image.load("milenario.png"), (70, 100))    
 #creador de enemigos
 class Enemigo(pygame.sprite.Sprite):
     def __init__(self, posicion) -> None:
