@@ -16,6 +16,7 @@ FPS = 30
 
 # Creamos una fuente para la pausa
 font = pygame.font.Font(None, 30)
+fuente_game_over = pygame.font.Font(None, 50)
 
 # Variables globales
 ultimo_enemigo_creado = 0
@@ -78,7 +79,7 @@ def start_the_game():
             if (momento_actual > ultimo_enemigo_creado + frecuencia_creacion_enemigo):
                 cordX = random.randint(0, pantalla.get_width())
                 cordY = -140
-                enemigo = Elementos2.Enemigo((cordX, cordY))
+                enemigo = Elementos2.Enemigo((cordX, cordY) , nave)
                 grupo_sprites_todos.add(enemigo)
                 grupo_sprites_enemigos.add(enemigo)
                 ultimo_enemigo_creado = momento_actual
@@ -97,10 +98,13 @@ def start_the_game():
           
             grupo_sprites_todos.draw(pantalla)
 
-        textoP = font.render(f"Puntuacion: {nave.puntuacion}", True, "White")
+        textoP = font.render(f"Puntuacion: {nave.getpuntuacion()}", True, "White")
         pantalla.blit(textoP, (10,10))
-        textoV = font.render(f"Vidas: {nave.vidas}", True, "White")
+        textoV = font.render(f"Vidas: {nave.getvidas()}", True, "White")
         pantalla.blit(textoV, (10,30))
+
+        vidas = nave.getvidas()
+       
 
 
         if pausado:
@@ -109,10 +113,26 @@ def start_the_game():
 
         pygame.display.flip()
 
+        
+        if vidas <= 0:            
+                    
+                    pantalla.fill((0, 0, 0))
+                    texto_game_over = pygame.image.load("game-over.jpg")
+                    x = (pantalla.get_width() - texto_game_over.get_width()) // 2
+                    y = (pantalla.get_height() - texto_game_over.get_height()) // 2
+                    pantalla.blit(texto_game_over, (x, y))
+                    textoP = fuente_game_over.render(f"Puntuacion: {nave.getpuntuacion()}", True, "White")
+                    pantalla.blit(textoP, (pantalla.get_width()/2.75,pantalla.get_height()/1.3))
+                    pygame.display.flip()
+                    pygame.time.delay(2000)
+                    
+            
+            
+
 # Menú principal
 # imagen = pygame.image.load("fondo.jpg")
-# imagen.blit(pantalla,(1000,800))        
-menu = pygame_menu.Menu('Welcome', 400, 300, theme=pygame_menu.themes.THEME_BLUE)
+# imagen.blit(pantalla,(800,1000))        
+menu = pygame_menu.Menu('Risky Rescue', 400, 300, theme=pygame_menu.themes.THEME_BLUE)
 
 menu.add.text_input('Name :', default='')
 menu.add.selector('Difficulty :', [('Hard', 400), ('Easy', 1500)], onchange=set_difficulty)

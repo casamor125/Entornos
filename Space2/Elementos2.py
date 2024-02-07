@@ -13,6 +13,7 @@ class Nave (pygame.sprite.Sprite):
         self.puntuacion = puntuacion
         self.parpadear = False
         self.tiempo_parpadear = pygame.time.get_ticks()
+        
 
 
         # imagen = pygame.image.load("Tie.png")
@@ -26,6 +27,12 @@ class Nave (pygame.sprite.Sprite):
         self.rect.topleft = posicion
         self.ultimo_disparo = 0
 
+    def getvidas(self):
+        return self.vidas
+    
+    def getpuntuacion(self):
+        return self.puntuacion
+
     def disparar(self, grupo_sprites_todos, grupo_sprites_bala):
         momento_actual = pygame.time.get_ticks()
         if momento_actual > self.ultimo_disparo + 300:
@@ -35,6 +42,9 @@ class Nave (pygame.sprite.Sprite):
             self.ultimo_disparo = momento_actual
 
     #update
+    def vidaMenos(self):
+        self.vidas -=1
+
     def update(self, *args: any, **kwargs: any ) -> None:
         teclas = args[0]
         #capturamos la pantalla
@@ -61,6 +71,8 @@ class Nave (pygame.sprite.Sprite):
 
         #gestionamos la animación
             
+        
+            
        
         # self.contador_imagen = (self.contador_imagen + 5) % 40
         # self.indice_imagen = self.contador_imagen // 30
@@ -72,17 +84,27 @@ class Nave (pygame.sprite.Sprite):
         #variable running
         running = args[5]
         #detectar colisiones
+        self.tiempo_explosion = pygame.time.get_ticks()
         enemigo_colision = pygame.sprite.spritecollideany(self, grupo_sprites_enemigos, pygame.sprite.collide_mask)
         if enemigo_colision:
-            tiempo_explosion = pygame.time.get_ticks()
             self.parpadear = True
-            enemigo_colision.image = enemigo_colision.imagen2[1]
- 
+            # enemigo_colision.image = enemigo_colision.imagen2[1]
+            enemigo_colision.haChocado()
             self.tiempo_parpadear = pygame.time.get_ticks()
-            if(tiempo_explosion>1000):
-                enemigo_colision.kill()
-                self.vidas -= 1 
-
+ 
+        
+        if self.parpadear:
+            tiempo_actual = pygame.time.get_ticks()
+            if tiempo_actual % 200 < 100:
+                self.image = pygame.Surface((1,1)) #imagen invisible
+            else:
+                self.image = pygame.transform.scale(pygame.image.load("milenario.png"), (70, 100))
+                #reiniciar parpadeo
+                if tiempo_actual - self.tiempo_parpadear > 1000: #duracion
+                    self.parpadear = False
+        else:
+            self.image = pygame.transform.scale(pygame.image.load("milenario.png"), (70, 100))
+            
             
         
         if self.vidas < 1:
@@ -107,7 +129,7 @@ class Nave (pygame.sprite.Sprite):
             self.image = pygame.transform.scale(pygame.image.load("milenario.png"), (70, 100))    
 #creador de enemigos
 class Enemigo(pygame.sprite.Sprite):
-    def __init__(self, posicion) -> None:
+    def __init__(self, posicion , Nave) -> None:
         super().__init__()
         #cargamos la imagen
         imagen = [pygame.image.load("meteorito.png"),pygame.image.load("explosion.png") ]
@@ -119,6 +141,9 @@ class Enemigo(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         #actualizar la posición del rectangulo para que coincida con "posicion"
         self.rect.topleft = posicion
+        self.chocado = False
+        self.destruir = 0
+        self.nave = Nave
 
     def update(self, *args: any, **kwargs: any):
         pantalla = pygame.display.get_surface()
@@ -133,9 +158,20 @@ class Enemigo(pygame.sprite.Sprite):
         grupo_sprites_bala = args[2]
         grupo_sprites_todos = args[1]
         bala_colision = pygame.sprite.spritecollideany(self, grupo_sprites_bala, pygame.sprite.collide_mask)
+        
         if bala_colision:
             self.kill()
             bala_colision.kill()
+
+        if self.chocado and self.destruir <  pygame.time.get_ticks():
+            self.kill()
+            self.nave.vidaMenos()
+
+    def haChocado(self):
+        self.image = self.imagen2[1]
+        self.chocado = True
+        self.destruir =  pygame.time.get_ticks() + 100
+
 
 
 class Fondo(pygame.sprite.Sprite):
