@@ -10,6 +10,23 @@ pygame.init()
 tamaño = (1000, 800)
 pantalla = pygame.display.set_mode(tamaño)
 
+
+imagen_fondo_menu = pygame_menu.baseimage.BaseImage(
+    image_path="fondo_menu.jpg",
+    drawing_mode=pygame_menu.baseimage.IMAGE_MODE_FILL
+)
+
+tema_menu = pygame_menu.themes.Theme(
+    background_color=imagen_fondo_menu, 
+    title_bar_style = pygame_menu.widgets.MENUBAR_STYLE_NONE,
+    title_font=pygame_menu.font.FONT_8BIT,
+    title_font_size=50,
+    widget_padding=35,
+    widget_font=pygame_menu.font.FONT_BEBAS,
+    widget_font_size=35,
+    widget_font_color = (255, 255, 255),
+)
+
 # Creamos un reloj
 reloj = pygame.time.Clock()
 FPS = 30
@@ -130,9 +147,8 @@ def start_the_game():
             
 
 # Menú principal
-# imagen = pygame.image.load("fondo.jpg")
-# imagen.blit(pantalla,(800,1000))        
-menu = pygame_menu.Menu('Risky Rescue', 400, 300, theme=pygame_menu.themes.THEME_BLUE)
+     
+menu = pygame_menu.Menu('Risky Rescue', 1000, 800, theme=tema_menu)
 
 menu.add.text_input('Name :', default='')
 menu.add.selector('Difficulty :', [('Hard', 400), ('Easy', 1500)], onchange=set_difficulty)
@@ -141,6 +157,7 @@ menu.add.button('Quit', pygame_menu.events.EXIT)
 
 
 # Mostramos el menú y ejecutamos el juego
+ 
 menu.mainloop(pantalla)
 
 # Finalizamos el juego
