@@ -5,7 +5,7 @@ class Nave (pygame.sprite.Sprite):
     def __init__(self, posicion , vidas , puntuacion) -> None:
         super().__init__()
         #cargamos la imagen
-        self.imagenes = pygame.image.load("milenario.png")
+        self.imagenes = pygame.image.load("nave.png")
         self.image = pygame.transform.scale(self.imagenes, (70, 100))
         self.mask = pygame.mask.from_surface(self.image)
         self.contador_imagen = 0
@@ -14,12 +14,6 @@ class Nave (pygame.sprite.Sprite):
         self.parpadear = False
         self.tiempo_parpadear = pygame.time.get_ticks()
         
-
-
-        # imagen = pygame.image.load("Tie.png")
-        # imagen2 = pygame.transform.scale(imagen, (80, 140))
-        # self.image = pygame.transform.rotate(imagen2, 180)
-        # self.mask = pygame.mask.from_surface(self.image)
 
         #creamos un rectangulo a partir de la imagen
         self.rect = self.image.get_rect()
@@ -98,12 +92,12 @@ class Nave (pygame.sprite.Sprite):
             if tiempo_actual % 200 < 100:
                 self.image = pygame.Surface((1,1)) #imagen invisible
             else:
-                self.image = pygame.transform.scale(pygame.image.load("milenario.png"), (70, 100))
+                self.image = pygame.transform.scale(pygame.image.load("nave.png"), (70, 100))
                 #reiniciar parpadeo
                 if tiempo_actual - self.tiempo_parpadear > 1000: #duracion
                     self.parpadear = False
         else:
-            self.image = pygame.transform.scale(pygame.image.load("milenario.png"), (70, 100))
+            self.image = pygame.transform.scale(pygame.image.load("nave.png"), (70, 100))
             
             
         
@@ -121,12 +115,12 @@ class Nave (pygame.sprite.Sprite):
             if tiempo_actual % 200 < 100:
                 self.image = pygame.Surface((1,1)) #imagen invisible
             else:
-                self.image = pygame.transform.scale(pygame.image.load("milenario.png"), (70, 100))
+                self.image = pygame.transform.scale(pygame.image.load("nave.png"), (70, 100))
                 #reiniciar parpadeo
                 if tiempo_actual - self.tiempo_parpadear > 1000: #duracion
                     self.parpadear = False
         else:
-            self.image = pygame.transform.scale(pygame.image.load("milenario.png"), (70, 100))    
+            self.image = pygame.transform.scale(pygame.image.load("nave.png"), (70, 100))    
 #creador de enemigos
 class Enemigo(pygame.sprite.Sprite):
     def __init__(self, posicion , Nave) -> None:
