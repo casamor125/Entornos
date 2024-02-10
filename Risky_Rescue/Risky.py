@@ -1,5 +1,5 @@
 import pygame
-import Elementos2
+import Risky_elements
 import random
 import pygame_menu
 
@@ -58,8 +58,8 @@ def start_the_game():
     puntuacion = 0
     vidas = 3
     posicion = (650, 700)
-    nave = Elementos2.Nave(posicion , vidas , puntuacion)
-    fondo = Elementos2.Fondo()
+    nave = Risky_elements.Nave(posicion , vidas , puntuacion)
+    fondo = Risky_elements.Fondo()
 
 
 
@@ -96,7 +96,7 @@ def start_the_game():
             if (momento_actual > ultimo_enemigo_creado + frecuencia_creacion_enemigo):
                 cordX = random.randint(0, pantalla.get_width())
                 cordY = -140
-                enemigo = Elementos2.Enemigo((cordX, cordY) , nave)
+                enemigo = Risky_elements.Enemigo((cordX, cordY) , nave)
                 grupo_sprites_todos.add(enemigo)
                 grupo_sprites_enemigos.add(enemigo)
                 ultimo_enemigo_creado = momento_actual
@@ -104,7 +104,7 @@ def start_the_game():
             if (momento_actual > ultimo_astronauta_creado + frecuencia_creacion_astronauta):
                 cordX = random.randint(0, pantalla.get_width())
                 cordY = -90
-                astronauta = Elementos2.Astronauta((cordX, cordY), nave)
+                astronauta = Risky_elements.Astronauta((cordX, cordY), nave)
                 grupo_sprites_todos.add(astronauta)
                 grupo_sprites_astronautas.add(astronauta)
                 ultimo_astronauta_creado = momento_actual
