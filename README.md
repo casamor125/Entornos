@@ -6,6 +6,6 @@
 <p>catch the astronauts to save them and avoid the asteroids</p>
 <p>or shoot them(K_SPACE) you choose!</p>
 <img src="image-1.png">
-<p>get as many astronauts you can and set a new high score</p>
+<p>get as many astronauts as you can and set a new high score</p>
 <img src="image-2.png">
 <p>Enjoy my first Game!</p>
