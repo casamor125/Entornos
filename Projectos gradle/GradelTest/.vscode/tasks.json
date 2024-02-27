@@ -1,0 +1,77 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "gradle",
+			"id": "c:\\Users\\bielc\\Entronos\\Entornos\\GradelTestapp:buildapp",
+			"script": "app:build",
+			"description": "Assembles and tests this project.",
+			"group": "build",
+			"project": "app",
+			"buildFile": "C:\\Users\\bielc\\Entronos\\Entornos\\GradelTest\\app\\build.gradle",
+			"rootProject": "GradelTest",
+			"projectFolder": "c:\\Users\\bielc\\Entronos\\Entornos\\GradelTest",
+			"workspaceFolder": "c:\\Users\\bielc\\Entronos\\Entornos\\GradelTest",
+			"args": "",
+			"javaDebug": false,
+			"problemMatcher": [
+				"$gradle"
+			],
+			"label": "gradle: app:build"
+		},
+		{
+			"type": "gradle",
+			"id": "c:\\Users\\bielc\\Entronos\\Entornos\\GradelTestapp:cleanapp",
+			"script": "app:clean",
+			"description": "Deletes the build directory.",
+			"group": "build",
+			"project": "app",
+			"buildFile": "C:\\Users\\bielc\\Entronos\\Entornos\\GradelTest\\app\\build.gradle",
+			"rootProject": "GradelTest",
+			"projectFolder": "c:\\Users\\bielc\\Entronos\\Entornos\\GradelTest",
+			"workspaceFolder": "c:\\Users\\bielc\\Entronos\\Entornos\\GradelTest",
+			"args": "",
+			"javaDebug": false,
+			"problemMatcher": [
+				"$gradle"
+			],
+			"label": "gradle: app:clean"
+		},
+		{
+			"type": "gradle",
+			"id": "c:\\Users\\bielc\\Entronos\\Entornos\\GradelTestapp:runapp",
+			"script": "app:run",
+			"description": "Runs this project as a JVM application",
+			"group": "application",
+			"project": "app",
+			"buildFile": "C:\\Users\\bielc\\Entronos\\Entornos\\GradelTest\\app\\build.gradle",
+			"rootProject": "GradelTest",
+			"projectFolder": "c:\\Users\\bielc\\Entronos\\Entornos\\GradelTest",
+			"workspaceFolder": "c:\\Users\\bielc\\Entronos\\Entornos\\GradelTest",
+			"args": "",
+			"javaDebug": false,
+			"problemMatcher": [
+				"$gradle"
+			],
+			"label": "gradle: app:run"
+		},
+		{
+			"type": "gradle",
+			"id": "c:\\Users\\bielc\\Entronos\\Entornos\\GradelTestapp:jarapp",
+			"script": "app:jar",
+			"description": "Assembles a jar archive containing the main classes.",
+			"group": "build",
+			"project": "app",
+			"buildFile": "C:\\Users\\bielc\\Entronos\\Entornos\\GradelTest\\app\\build.gradle",
+			"rootProject": "GradelTest",
+			"projectFolder": "c:\\Users\\bielc\\Entronos\\Entornos\\GradelTest",
+			"workspaceFolder": "c:\\Users\\bielc\\Entronos\\Entornos\\GradelTest",
+			"args": "",
+			"javaDebug": false,
+			"problemMatcher": [
+				"$gradle"
+			],
+			"label": "gradle: app:jar"
+		}
+	]
+}
