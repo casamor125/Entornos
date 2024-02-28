@@ -72,6 +72,24 @@
 				"$gradle"
 			],
 			"label": "gradle: app:jar"
+		},
+		{
+			"type": "gradle",
+			"id": "c:\\Users\\bielc\\Entronos\\Entornos\\Projectos gradle\\GradelTestapp:testapp",
+			"script": "app:test",
+			"description": "Runs the test suite.",
+			"group": "verification",
+			"project": "app",
+			"buildFile": "C:\\Users\\bielc\\Entronos\\Entornos\\Projectos gradle\\GradelTest\\app\\build.gradle",
+			"rootProject": "GradelTest",
+			"projectFolder": "c:\\Users\\bielc\\Entronos\\Entornos\\Projectos gradle\\GradelTest",
+			"workspaceFolder": "c:\\Users\\bielc\\Entronos\\Entornos\\Projectos gradle\\GradelTest",
+			"args": "",
+			"javaDebug": false,
+			"problemMatcher": [
+				"$gradle"
+			],
+			"label": "gradle: app:test"
 		}
 	]
 }

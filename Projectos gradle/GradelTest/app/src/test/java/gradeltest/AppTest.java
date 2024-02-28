@@ -7,8 +7,47 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AppTest {
-    @Test void appHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull(classUnderTest.getGreeting(), "app should have a greeting");
+
+    @Test
+    public void testcomptarElements() {
+        int[] prueba = {1, 2, 3, 56, 78};
+        Gestor g = new Gestor(prueba);
+        assertEquals(5, g.comptarElements());
     }
+
+    @Test
+    public void testretornarPrimer() {
+        int[] prueba = {1, 2, 3, 56, 78};
+        Gestor g = new Gestor(prueba);
+        assertEquals(1, g.retornarPrimer());
+    }
+
+    @Test
+    public void testretornarDarrer() {
+        int[] prueba = {1, 2, 3, 56, 78};
+        Gestor g = new Gestor(prueba);
+        assertEquals(78, g.retornarDarrer());
+    }
+
+    @Test
+    public void testretornarTercer() {
+        int[] prueba = {1, 2, 3, 56, 78};
+        Gestor g = new Gestor(prueba);
+        assertEquals(3, g.retornarTercer());
+    }
+
+    @Test
+    public void testsumaElements() {
+        int[] prueba = {1, 2, 3, 56, 78};
+        Gestor g = new Gestor(prueba);
+        assertEquals(140, g.comptarElements());
+    }
+
+    @Test
+    public void testmitjanaElements() {
+        int[] prueba = {1, 2, 3, 56, 78};
+        Gestor g = new Gestor(prueba);
+        assertEquals(28, g.comptarElements());
+    }
+
 }

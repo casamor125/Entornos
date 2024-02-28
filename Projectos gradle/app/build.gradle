@@ -9,10 +9,6 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
-   
-    id 'com.adarshr.test-logger' version '4.0.0'
-
-    
 }
 
 repositories {
@@ -30,17 +26,10 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass = 'gradeltest.App'
+    mainClass = 'projectos.gradle.App'
 }
 
 tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
-}
-jar {
-    manifest {
-        attributes(
-            "Main-Class": 'gradeltest'
-        )
-    }
 }

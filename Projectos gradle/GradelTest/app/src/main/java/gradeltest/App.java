@@ -4,11 +4,17 @@
 package gradeltest;
 
 public class App {
-    public String getGreeting() {
-        return "Biel";
-    }
-
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
-    }
-}
+        int[] prueba = {1,2,3,56,78}; 
+        
+         Gestor g = new Gestor(prueba);
+         g.comptarElements();
+         g.retornarPrimer();
+         g.retornarDarrer();
+         g.retornarTercer();
+         g.sumaElements();
+         g.mitjanaElements();
+         
+     }
+ }
+ 
