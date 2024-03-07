@@ -1,0 +1,77 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "gradle",
+			"id": "c:\\Users\\bielc\\Entronos\\Entornos\\Clase a partir de Testsapp:buildapp",
+			"script": "app:build",
+			"description": "Assembles and tests this project.",
+			"group": "build",
+			"project": "app",
+			"buildFile": "C:\\Users\\bielc\\Entronos\\Entornos\\Clase a partir de Tests\\app\\build.gradle",
+			"rootProject": "Prueba2",
+			"projectFolder": "c:\\Users\\bielc\\Entronos\\Entornos\\Clase a partir de Tests",
+			"workspaceFolder": "c:\\Users\\bielc\\Entronos\\Entornos\\Clase a partir de Tests",
+			"args": "",
+			"javaDebug": false,
+			"problemMatcher": [
+				"$gradle"
+			],
+			"label": "gradle: app:build"
+		},
+		{
+			"type": "gradle",
+			"id": "c:\\Users\\bielc\\Entronos\\Entornos\\Clase a partir de Testsapp:cleanapp",
+			"script": "app:clean",
+			"description": "Deletes the build directory.",
+			"group": "build",
+			"project": "app",
+			"buildFile": "C:\\Users\\bielc\\Entronos\\Entornos\\Clase a partir de Tests\\app\\build.gradle",
+			"rootProject": "Prueba2",
+			"projectFolder": "c:\\Users\\bielc\\Entronos\\Entornos\\Clase a partir de Tests",
+			"workspaceFolder": "c:\\Users\\bielc\\Entronos\\Entornos\\Clase a partir de Tests",
+			"args": "",
+			"javaDebug": false,
+			"problemMatcher": [
+				"$gradle"
+			],
+			"label": "gradle: app:clean"
+		},
+		{
+			"type": "gradle",
+			"id": "c:\\Users\\bielc\\Entronos\\Entornos\\Clase a partir de Testsapp:runapp",
+			"script": "app:run",
+			"description": "Runs this project as a JVM application",
+			"group": "application",
+			"project": "app",
+			"buildFile": "C:\\Users\\bielc\\Entronos\\Entornos\\Clase a partir de Tests\\app\\build.gradle",
+			"rootProject": "Prueba2",
+			"projectFolder": "c:\\Users\\bielc\\Entronos\\Entornos\\Clase a partir de Tests",
+			"workspaceFolder": "c:\\Users\\bielc\\Entronos\\Entornos\\Clase a partir de Tests",
+			"args": "",
+			"javaDebug": false,
+			"problemMatcher": [
+				"$gradle"
+			],
+			"label": "gradle: app:run"
+		},
+		{
+			"type": "gradle",
+			"id": "c:\\Users\\bielc\\Entronos\\Entornos\\Clase a partir de Testsapp:testapp",
+			"script": "app:test",
+			"description": "Runs the test suite.",
+			"group": "verification",
+			"project": "app",
+			"buildFile": "C:\\Users\\bielc\\Entronos\\Entornos\\Clase a partir de Tests\\app\\build.gradle",
+			"rootProject": "Prueba2",
+			"projectFolder": "c:\\Users\\bielc\\Entronos\\Entornos\\Clase a partir de Tests",
+			"workspaceFolder": "c:\\Users\\bielc\\Entronos\\Entornos\\Clase a partir de Tests",
+			"args": "",
+			"javaDebug": false,
+			"problemMatcher": [
+				"$gradle"
+			],
+			"label": "gradle: app:test"
+		}
+	]
+}
