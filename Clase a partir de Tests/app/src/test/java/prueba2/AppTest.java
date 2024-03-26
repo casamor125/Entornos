@@ -7,8 +7,69 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AppTest {
-    @Test void appHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull(classUnderTest.getGreeting(), "app should have a greeting");
+    @Test
+    public void testAfegirPlatMenu() {
+        Menu m = new Menu();
+        m.afegir_plat("Macarrones", 10.50);
+        assertEquals(10.50, m.menu.get("Macarrones"));
+       
+    }
+
+    @Test
+    public void testEliminarPlat() {
+        Menu m = new Menu();
+        m.afegir_plat("Macarrones", 10.50);
+        m.eliminar_plat("Macarrones");
+        assertEquals(null, m.menu.get("Macarrones"));
+       
+    }
+    @Test
+    public void testLlistarMenu() {
+        Menu m = new Menu();
+        m.afegir_plat("Macarrones", 10.50);
+        m.afegir_plat("Pizza", 12.50);
+        
+        assertEquals(m.menu, m.llistar_menu());
+       
+    }
+        @Test
+    public void testCrearComanda() {
+        Menu m = new Menu();
+        int comandasIniciales = m.comanda.size();
+        m.crearComanda();  
+        int comandasFinales = m.comanda.size();      
+        assertEquals(comandasIniciales+1, comandasFinales);       
+    }
+
+    @Test
+    public void testAfegirPlatComanda() {
+        Menu m = new Menu();
+        m.crearComanda();  
+        m.afegirPlatComanda(0, "Macarrones");   
+        assertEquals(m.platosComanda.get(0),"Macarrones");       
+    }
+
+    @Test
+    public void testCalcularTotal() {
+        Menu m = new Menu();
+        m.afegir_plat("Macarrones", 10.50);
+        m.crearComanda();  
+        m.afegirPlatComanda(0, "Macarrones");     
+        assertEquals(10.50, m.CalcularTotal(0));   
+
+    }
+    @Test
+    public void testLlistarComanda() {
+        
+        Menu m = new Menu();
+
+        m.afegir_plat("Macarrones", 10.50);
+        m.afegir_plat("Pizza", 12.50);
+        m.crearComanda();
+        m.afegirPlatComanda(0,"Macarrones");
+        m.afegirPlatComanda(0,"Pizza");
+
+        assertEquals(m.comanda.get(0), m.MostrarComanda(0));
+       
     }
 }
